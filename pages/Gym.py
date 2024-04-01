@@ -58,7 +58,7 @@ with tab2:
     submit_btn = st.button("Register")
 
     if submit_btn:
-        if not muscle_group or not exercice or not weight or not series or not repetitions or not drop1 or not drop2 or not drop3:
+        if not muscle_group or not exercice or not weight or not series or not repetitions:
             st.warning("Fill all fields")
             st.stop()
 
