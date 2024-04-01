@@ -45,9 +45,9 @@ with tab2:
         if drop:
             weight = 0
             with st.expander("Drop Weight:"):
-                drop1 = st.number_input(label="Start Weight")
-                drop2 = st.number_input(label="Medium Weight")
-                drop3 = st.number_input(label="Last Weight")
+                drop1 = st.number_input(label="Start Weight", step=1)
+                drop2 = st.number_input(label="Medium Weight", step=1)
+                drop3 = st.number_input(label="Last Weight", step=1)
         else:
             drop1, drop2, drop3 = 0,0,0
 
