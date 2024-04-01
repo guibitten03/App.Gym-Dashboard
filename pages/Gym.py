@@ -5,10 +5,10 @@ from constants.Constants import *
 st.set_page_config(layout="wide")
 
 st.title("📁 Gym Dashboard")
-st.markdown("You can see all information bellow!")
+st.markdown("You can input fit infomation bellow!")
 
 database = Database(worksheets=[
-    ("GYM", 6)
+    ("GYM", 9)
 ])
 
 # st.dataframe(database.worksheets["GYM"])
@@ -51,9 +51,13 @@ with tab2:
 
     submit_btn = st.button("Register")
 
-    # if submit_btn:
-    #     if not muscle_group or not exercice or not weight or not series or not repetitions:
-    #         st.warning("Fill all fields")
-    #         st.stop()
+    if submit_btn:
+        if not muscle_group or not exercice or not weight or not series or not repetitions:
+            st.warning("Fill all fields")
+            st.stop()
 
-    #     else:
+        else:
+            register_data = pd.DataFrame([{
+                "Data": date.strftime('%d-%m-%Y'),
+
+            }])
