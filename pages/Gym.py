@@ -11,12 +11,18 @@ database = Database(worksheets=[
     ("GYM", 9)
 ])
 
+sheet = database.worksheets['GYM']
+
 # st.dataframe(database.worksheets["GYM"])
 
 tab1, tab2 = st.tabs(["Analysis", "Register Fit"])
 
 with tab1:
-    ...
+    database = Database(worksheets=[
+        ("GYM", 9)
+    ])
+
+    st.dataframe(sheet)
 
 with tab2:
     date = st.date_input(label="Today")
@@ -52,12 +58,25 @@ with tab2:
     submit_btn = st.button("Register")
 
     if submit_btn:
-        if not muscle_group or not exercice or not weight or not series or not repetitions:
+        if not muscle_group or not exercice or not weight or not series or not repetitions or not drop1 or not drop2 or not drop3:
             st.warning("Fill all fields")
             st.stop()
 
         else:
             register_data = pd.DataFrame([{
                 "Data": date.strftime('%d-%m-%Y'),
-
+                "Grupo Muscular": muscle_group,
+                "Exercicio": exercice,
+                "Carga": weight,
+                "Séries": series,
+                "Repetições": repetitions,
+                "Drop 1": drop1,
+                "Drop 2": drop2,
+                "Drop 3": drop3,
             }])
+
+            updated_df = pd.concat([sheet, register_data], ignore_index=True)
+
+            database.conn.update(worksheet="GYM", data=updated_df)
+
+            st.success("Fitness Registed with Success!")
