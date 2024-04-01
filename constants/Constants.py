@@ -16,4 +16,4 @@ EXERCICES = {
 
 SERIES = [3,4,5]   
 
-REPETITIONS = [12, 15, 20, 24]
+REPETITIONS = [12, 15, 20, 24, "1'"]
