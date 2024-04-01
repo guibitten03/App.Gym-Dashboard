@@ -18,11 +18,8 @@ sheet = database.worksheets['GYM']
 tab1, tab2 = st.tabs(["Analysis", "Register Fit"])
 
 with tab1:
-    database = Database(worksheets=[
-        ("GYM", 9)
-    ])
 
-    st.dataframe(sheet)
+    st.data_editor(sheet)
 
 with tab2:
     date = st.date_input(label="Today")
@@ -32,6 +29,10 @@ with tab2:
     exercice = None
     if muscle_group != None:
         exercice = st.selectbox(label="Choice some exercise", options=EXERCICES[muscle_group])
+
+    series = st.selectbox(label="Choice a serie", options=SERIES)
+
+    repetitions = st.selectbox(label="Choice a repetition size", options=REPETITIONS)
 
     c1, c2 = st.columns(2, gap="small")
 
@@ -50,10 +51,6 @@ with tab2:
         else:
             drop1, drop2, drop3 = 0,0,0
 
-
-    series = st.selectbox(label="Choice a serie", options=SERIES)
-
-    repetitions = st.selectbox(label="Choice a repetition size", options=REPETITIONS)
 
     submit_btn = st.button("Register")
 
