@@ -17,6 +17,9 @@ sheet = database.worksheets['GYM']
 
 tab1, tab2 = st.tabs(["Analysis", "Register Fit"])
 
+sheet['Data'] = [x.replace('/', '-') for x in sheet['Data'].values]
+sheet['Data'] = [x.replace('24', '2024') for x in sheet['Data'].values]
+
 with tab1:
 
     st.data_editor(sheet)
