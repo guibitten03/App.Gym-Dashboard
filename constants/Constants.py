@@ -11,9 +11,16 @@ EXERCICES = {
     "Trapézio": ["Elevação"],
     "Antebraço": ["Rosca Inversa", "Rosca Parafuso"],
     "Lombar": ["Cadeira"],
-    "Panturrilha": ["Cadeira"]
+    "Panturrilha": ["Cadeira"],
 }
 
 SERIES = [3,4,5]   
 
 REPETITIONS = [12, 15, 20, 24, "1'"]
+
+DIVISION = {
+    "Push": ["Peito", "Tríceps", "Abdominal"],
+    "Pull": ["Costas", "Bíceps", "Abdominal"],
+    "Leg Day": ["Quadríceps", "Posterior", "Glúteo", "Panturrilha"],
+    "Periféricos": ["Ombro", "Trapézio", "Antebraço", "Lombar", "Abdominal"],
+}

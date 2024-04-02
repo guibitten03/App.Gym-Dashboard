@@ -19,7 +19,14 @@ tab1, tab2 = st.tabs(["Analysis", "Register Fit"])
 
 with tab1:
 
-    st.data_editor(sheet)
+    # division = st.selectbox(label="Select Division for Fit", options=DIVISION.keys())
+
+    # for muscle in EXERCICES[division]:
+
+
+
+    with st.expander("Dataframe"):
+        st.data_editor(sheet)
 
 with tab2:
     date = st.date_input(label="Today")
