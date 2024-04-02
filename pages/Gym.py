@@ -8,7 +8,7 @@ st.title("📁 Gym Dashboard")
 st.markdown("You can input fit infomation bellow!")
 
 database = Database(worksheets=[
-    ("GYM", 9)
+    ("GYM", 12)
 ])
 
 sheet = database.worksheets['GYM']
@@ -32,30 +32,47 @@ with tab2:
 
     series = st.selectbox(label="Choice a serie", options=SERIES)
 
-    repetitions = st.selectbox(label="Choice a repetition size", options=REPETITIONS)
 
-    c1, c2 = st.columns(2, gap="small")
+    c1_rep, c2_rep = st.columns(2, gap="small")
 
-    with c1:
+    with c1_rep:
+        repetitions = st.selectbox(label="Choice a repetition size", options=REPETITIONS)
+
+    with c2_rep:
+        drop_rep = st.toggle(label="Drop Repetition?")
+
+        if drop_rep:
+            weight = 0
+            with st.expander("Drop Repetition:"):
+                drop_rep_1 = st.number_input(label="Start Repetition", step=1)
+                drop_rep_2 = st.number_input(label="Medium Repetition", step=1)
+                drop_rep_3 = st.number_input(label="Last Repetition", step=1)
+        else:
+            drop_rep_1, drop_rep_2, drop_rep_3 = 0,0,0
+
+
+    c1_weight, c2_weight = st.columns(2, gap="small")
+
+    with c1_weight:
         weight = st.number_input(label="Weight Value", step=1)
 
-    with c2:
-        drop = st.toggle(label="Drop?")
+    with c2_weight:
+        drop_w = st.toggle(label="Drop Weight?")
 
-        if drop:
+        if drop_w:
             weight = 0
             with st.expander("Drop Weight:"):
-                drop1 = st.number_input(label="Start Weight", step=1)
-                drop2 = st.number_input(label="Medium Weight", step=1)
-                drop3 = st.number_input(label="Last Weight", step=1)
+                drop_w_1 = st.number_input(label="Start Weight", step=1)
+                drop_w_2 = st.number_input(label="Medium Weight", step=1)
+                drop_w_3 = st.number_input(label="Last Weight", step=1)
         else:
-            drop1, drop2, drop3 = 0,0,0
+            drop_w_1, drop_w_2, drop_w_3 = 0,0,0
 
 
     submit_btn = st.button("Register")
 
     if submit_btn:
-        if not muscle_group or not exercice or not weight or not series or not repetitions:
+        if not muscle_group or not exercice or not series or not repetitions:
             st.warning("Fill all fields")
             st.stop()
 
@@ -67,9 +84,12 @@ with tab2:
                 "Carga": weight,
                 "Séries": series,
                 "Repetições": repetitions,
-                "Drop 1": drop1,
-                "Drop 2": drop2,
-                "Drop 3": drop3,
+                "Drop 1 - Carga": drop_w_1,
+                "Drop 2 - Carga": drop_w_2,
+                "Drop 3 - Carga": drop_w_3,
+                "Drop 1 - Repetição": drop_rep_1,
+                "Drop 2 - Repetição": drop_rep_2,
+                "Drop 3 - Repetição": drop_rep_3,
             }])
 
             updated_df = pd.concat([sheet, register_data], ignore_index=True)
