@@ -3,7 +3,7 @@ EXERCICES = {
     "Costas": ["Puxador Frontal", "Remada Curvada", "Remada Baixa", "Barra Fixa", "Pulley Articulado", "Remada Cavalinho", "Pullover", "Fly Inverso"],
     "Tríceps": ["Polia", "Corda", "Mergulho", "Frances", "Coice"],
     "Bíceps": ["Martelo", "Rosca Direta", "Scott"],
-    "Ombro": ["Elevação Lateral", "Remada Alta", "Fly Inverso", "Desenvolvimento Livre", "Desenvolvimento com Halter"],
+    "Ombro": ["Elevação Lateral", "Remada Alta", "Fly Inverso", "Desenvolvimento Guiado", "Desenvolvimento com Halter"],
     "Abdominal": ["Infra", "Militar", "Prancha"],
     "Quadríceps": ["Agachamento Livre", "Mesa Extensora", "Agachamento Isométrico"],
     "Posterior": ["Mesa Flexora", "Flexão em Pé", "Cadeira Flexora"],
@@ -16,11 +16,12 @@ EXERCICES = {
 
 SERIES = [3,4,5]   
 
-REPETITIONS = [12, 15, 20, 24, "1'"]
+REPETITIONS = [12, 15, 20, 21, 24, 1]
 
 DIVISION = {
-    "Push": ["Peito", "Tríceps", "Abdominal"],
-    "Pull": ["Costas", "Bíceps", "Abdominal"],
+    "Push": ["Peito", "Tríceps"],
+    "Pull": ["Costas", "Bíceps"],
     "Leg Day": ["Quadríceps", "Posterior", "Glúteo", "Panturrilha"],
-    "Periféricos": ["Ombro", "Trapézio", "Antebraço", "Lombar", "Abdominal"],
+    "Periféricos": ["Ombro", "Trapézio", "Antebraço", "Lombar"],
+    "Abdomen": ["Abdominal"]
 }
