@@ -17,9 +17,8 @@ database = Database(worksheets=[
 gym = database.worksheets['GYM']
 trains = database.worksheets['TRAINS']
 
-# st.dataframe(database.worksheets["GYM"])
+tab1, tab2, tab3, tab4 = st.tabs(["Current Train", "Register Fit", "Register Train", "Evolution"])
 
-tab1, tab2, tab3 = st.tabs(["Current Train", "Register Fit", "Register Train"])
 
 with tab1:
 
@@ -53,7 +52,7 @@ with tab1:
                 with st.container(border=True):
                     st.markdown(f'''
                                 #### {ex}
-                                ##### {int(ex_status['Carga'].values)} Kg. | {int(ex_status['Repetições'].values)} Rep. | {int(ex_status['Séries'].values)} Ser.
+                                ##### {int(ex_status['Carga'].values[0])} Kg. | {int(ex_status['Repetições'].values[0])} Rep. | {int(ex_status['Séries'].values[0])} Ser.
                                 ''')
 
         st.divider()            
@@ -68,7 +67,6 @@ with tab1:
             database.conn.update(worksheet="GYM", data=gym_edition)
 
             st.success("Fitness Registed with Success!")
-
 
 
 with tab2:
@@ -187,3 +185,36 @@ with tab3:
                 database.conn.update(worksheet="TRAINS", data=updated_df)
 
                 st.success("Train Registed with Success!")
+
+
+with tab4:
+    division = st.selectbox(label="Select Analysis Fit", options=DIVISION.keys())
+
+    st.divider()
+
+    exercicies_muscle = trains.loc[trains['Division Train'] == division].iloc[:, 1:]
+
+    exercicies_muscle_dict = exercicies_muscle.to_dict()
+
+    titles = exercicies_muscle_dict['Muscle Group'].values()
+
+    for group in titles:
+        st.markdown(f"### {group.upper()}")
+
+        train_pattern = trains.loc[trains["Muscle Group"] == group]
+
+        ex_list = [i for i in train_pattern.values.tolist()[0] if str(i) != '*'][2:]  
+
+        n_cols = len(ex_list)
+        cols = st.columns(n_cols, gap="small")
+
+        for col, ex in zip(cols, ex_list):
+            if ex not in gym['Exercicio'].values:
+                continue
+
+            ex_status = gym.loc[gym['Exercicio'] == ex][['Data', 'Carga']]
+
+            with col:
+                with st.container(border=True):
+                    st.markdown(f"#### {ex}")
+                    st.line_chart(ex_status, x="Data", y="Carga")
